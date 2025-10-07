@@ -2,8 +2,8 @@ import os
 import requests
 from telegram import Bot
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
-CHAT_ID = os.environ.get("CHAT_ID")
+BOT_TOKEN = os.environ.get("7693666210:AAEGwalMEFXh83VTLI4sahGdITEYL8X84f0")
+CHAT_ID = os.environ.get("7474293121")
 DOMAIN = os.environ.get("DOMAIN")
 CHECK_TYPE = os.environ.get("CHECK_TYPE", "http")
 
