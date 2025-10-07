@@ -2,8 +2,8 @@ name: Domain Check Bot
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Her saat başı (UTC) → Türkiye saatiyle de saat başı
-  workflow_dispatch:      # Elle başlatma butonunu da aktif tut
+    - cron: '0 * * * *'  # Her saat başı (UTC)
+  workflow_dispatch:     # İstersen manuel de başlatabilirsin
 
 jobs:
   check:
