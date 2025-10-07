@@ -1,1 +1,1 @@
-check.py
+run: python check.py
