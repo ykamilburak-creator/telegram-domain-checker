@@ -4,7 +4,7 @@ from telegram import Bot
 
 BOT_TOKEN = os.environ.get("7693666210:AAEGwalMEFXh83VTLI4sahGdITEYL8X84f0")
 CHAT_ID = os.environ.get("7474293121")
-DOMAIN = os.environ.get("DOMAIN")
+DOMAIN = os.environ.get("bahisbudur568.com")
 CHECK_TYPE = os.environ.get("CHECK_TYPE", "http")
 
 bot = Bot(token=BOT_TOKEN)
