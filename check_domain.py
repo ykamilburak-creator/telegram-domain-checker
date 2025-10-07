@@ -1,24 +1,25 @@
-name: Domain Check Bot
+import os
+import requests
+from telegram import Bot
 
-on:
-  schedule:
-    - cron: '0 * * * *'     # ⏰ HER SAAT BAŞI (UTC) → Türkiye saatiyle de saat başı
-  workflow_dispatch:         # Elle başlatmaya da izin verir
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+DOMAIN = os.environ.get("DOMAIN")
+CHECK_TYPE = os.environ.get("CHECK_TYPE", "http")
 
-jobs:
-  check:
-    runs-on: ubuntu-latest
+bot = Bot(token=BOT_TOKEN)
 
-    steps:
-      - uses: actions/checkout@v2
+def check_domain():
+    url = f"http://{DOMAIN}"
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            message = f"Domain kontrolü: {DOMAIN}\nTip: {CHECK_TYPE}\nDurum: ✅ Site YUKARI\nDetay: HTTP 200 - OK"
+        else:
+            message = f"Domain kontrolü: {DOMAIN}\nTip: {CHECK_TYPE}\nDurum: ⚠️ Site AŞAĞI\nDetay: HTTP {response.status_code}"
+    except Exception as e:
+        message = f"Domain kontrolü: {DOMAIN}\nTip: {CHECK_TYPE}\nDurum: ⚠️ Site AŞAĞI\nDetay: {str(e)}"
+    bot.send_message(chat_id=CHAT_ID, text=message)
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-
-      - name: Install requirements
-        run: pip install -r requirements.txt
-
-      - name: Run domain check
-        run: python check.py
+if __name__ == "__main__":
+    check_domain()
